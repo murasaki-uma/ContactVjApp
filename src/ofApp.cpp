@@ -5,6 +5,21 @@ void ofApp::setup(){
     ofBackground(0,0,0);
     ofSetFrameRate(60);
     ofSetVerticalSync(true);
+    ofEnableAlphaBlending();
+    
+    parameters_fbo.setName("fbo settings");
+    parameters_fbo.add(fboMain.set("main",false));
+    parameters_fbo.add(fboAlpha.set("alpha",false));
+    parameters_fbo.add(fboYposition.set("Y",300,0,ofGetHeight()));
+    parameters_fbo.add(clearAlpha.set("clear alpha",15,0,255));
+    parameters_fbo.add(mainAlpha.set("main alpha",15,0,255));
+    parameters_fbo.add(alphaAlpha.set("alpha alpha",15,0,255));
+    
+    parameters.setName("settings");
+    parameters.add(parameters_fbo);
+    gui.setup(parameters);
+    
+    sync.setup((ofParameterGroup&)gui.getParameter(),6666,"localhost",6667);
     
     mainFbo.allocate(width, height, GL_RGBA);
     rgbaFboFloat.allocate(width, height, GL_RGBA );
@@ -28,7 +43,9 @@ void ofApp::setup(){
     
     noiseline.setup();
     arline.setup();
-    
+    darkball.setup();
+    noisewalker.setup();
+    field.setup();
     
     
     
@@ -56,7 +73,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    
+    sync.update();
     scaledVol = ofMap(smoothedVol, 0.0, 0.17, 0.0, 1.0, true);
     
     //lets record the volume into an array
@@ -67,12 +84,14 @@ void ofApp::update(){
         volHistory.erase(volHistory.begin(), volHistory.begin()+1);
     }
 
-    
+    darkball.update();
     
     l.update();
     wavelines.update();
     noiseline.update();
     arline.update(float(scaledVol)*70.0);
+    noisewalker.update();
+    field.update(float(scaledVol)*1.0);
     
     mainFbo.begin();
     drawFboTest();
@@ -90,15 +109,18 @@ void ofApp::drawFboTest(){
     
     
     camera.begin();
-    ofSetColor(0,0,0,255);
-    ofDrawRectangle(-width/2,-height/2,width,height);
-    ofSetColor(0,0,0,0);
-    ofDrawRectangle(-width/2,-height/2,width,height);
-//    l.draw();
-//    noiseline.draw();
-    arline.draw();
-//    l.draw();
+    ofClear(0,0,0,0);
+//    ofSetColor(0,0,0,255);
+//    ofDrawRectangle(-width/2,-height/2,width,height);
+//    ofSetColor(0,0,0,0);
+//    ofDrawRectangle(-width/2,-height/2,width,height);
 
+    //    l.draw();
+//    noiseline.draw();
+//    arline.draw();
+    l.draw();
+//    darkball.draw();
+//    field.draw();
     camera.end();
     
 //    l.update();
@@ -108,7 +130,7 @@ void ofApp::drawFboTest(){
 
 void ofApp::drawFboTrailsTest(){
     camera.begin();
-    ofSetColor(0,0,0, 15);
+    ofSetColor(0,0,0, clearAlpha);
     ofDrawRectangle(-width/2,-height/2,width,height);
     ofNoFill();
     ofSetColor(255,255,255);
@@ -116,6 +138,7 @@ void ofApp::drawFboTrailsTest(){
     
 //    l.drawRipple();
 //    wavelines.draw();
+    noisewalker.draw();
     
     camera.end();
     
@@ -129,9 +152,37 @@ void ofApp::drawFboTrailsTest(){
 void ofApp::draw(){
 
 
-    ofSetColor(255,255,255);
-    mainFbo.draw(0,0,ofGetWidth(),ofGetHeight());
-    rgbaFboFloat.draw(0,0,ofGetWidth(),ofGetHeight());
+    
+    
+    ofPushMatrix();
+    ofTranslate(0, fboYposition);
+//    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    
+    
+    
+  
+    
+  
+    
+    if(fboAlpha)
+    {
+        ofSetColor(255,255,255,alphaAlpha);
+        rgbaFboFloat.draw(0,0,ofGetWidth(),ofGetHeight()/2);
+    }
+    
+    if(fboMain)
+    {
+        //        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+        ofSetColor(255,255,255,mainAlpha);
+        mainFbo.draw(0,0,ofGetWidth(),ofGetHeight()/2);
+    }
+    
+    
+    
+    ofPopMatrix();
+    
+    
+    gui.draw();
     
 }
 
@@ -142,6 +193,15 @@ void ofApp::keyPressed(int key){
     {
         l.isRotate = true;
         l.time = 0.0;
+    }
+    
+    
+    
+    if(key == 's') {
+        gui.saveToFile("settings.xml");
+    }
+    if(key == 'l') {
+        gui.loadFromFile("settings.xml");
     }
 }
 
@@ -172,6 +232,9 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
     smoothedVol += 0.07 * curVol;
     
     bufferCounter++;
+    
+    
+    
     
 }
 

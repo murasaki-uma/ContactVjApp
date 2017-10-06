@@ -67,7 +67,6 @@ public:
                 ofVec3f n = ofVec3f(
                                     ofNoise((p.x)*scale)-0.5,
                                     ofNoise(p.x*scale,time, i*0.4)-0.5,
-                                    //                                ofNoise(time*4.0)-0.5
                                     ofNoise(p.x*scale,time*0.8, i*0.6)-0.5
                                     );
                 

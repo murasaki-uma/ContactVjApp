@@ -6,6 +6,12 @@
 #include "WaveLines.h"
 #include "NoiseLine.h"
 #include "AudioReactiveLine.h"
+#include "DarkBall.h"
+#include "NoiseWalker.h"
+#include "NoiseField.h"
+#include "ofxGui.h"
+#include "ofxOscParameterSync.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -42,7 +48,7 @@ class ofApp : public ofBaseApp{
     
     ofFbo mainFbo;
     ofFbo rgbaFboFloat;
-    int width = 1920 ;
+    int width = 1920*2 ;
     int height = 1080;
     
     ofEasyCam camera;
@@ -53,4 +59,29 @@ class ofApp : public ofBaseApp{
     WaveLines wavelines;
     NoiseLine noiseline;
     AudioReactiveLine arline;
+    DarkBall darkball;
+    NoiseWalker noisewalker;
+    NoiseField field;
+    
+    
+    
+    // gui
+    
+    ofxOscParameterSync sync;
+    ofParameter<float> fboYposition;
+    ofParameter<bool> fboMain;
+    ofParameter<bool> fboAlpha;
+    ofParameter<bool> drawLogo;
+    ofParameter<bool> drawRipple;
+    ofParameter<bool> drawLineParticle;
+    ofParameter<bool> drawAudioLine;
+    ofParameter<int> clearAlpha;
+    ofParameter<int> mainAlpha;
+    ofParameter<int> alphaAlpha;
+    
+    
+    ofParameterGroup parameters_fbo;
+    ofParameterGroup parameters;
+    ofxPanel gui;
+    
 };

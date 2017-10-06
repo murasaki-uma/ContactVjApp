@@ -203,7 +203,7 @@ public:
     
     void draw()
     {
-        
+        ofNoFill();
         ofSetLineWidth(4);
         
         
