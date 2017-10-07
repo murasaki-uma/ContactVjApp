@@ -22,7 +22,8 @@ public:
     float xstep = 10;
     float ystep = 6;
     float ySize = 20;
-    float time = 0;
+    float time = ofRandom(PI*2);
+	float scale = 0.01 + ofRandom(-0.005, 0.005);
     vector<float> dists;
     NoiseLine()
     {
@@ -62,7 +63,7 @@ public:
             
             ofVec3f p = points.getVertices()[i];
             ofVec3f p_o = points_orgin.getVertices()[i];
-            float scale = 0.01;
+            
             ofVec3f n = ofVec3f(
                                 ofNoise((p.x)*scale)-0.5,
                                 ofNoise(p.y*scale)-0.5,
@@ -108,7 +109,7 @@ public:
     {
         ofSetLineWidth(2);
         ofPushMatrix();
-        ofRotate(sin(time)*90.0, sin(time), cos(time), cos(time*1.5));
+        ofRotate(sin(time*0.1)*90.0, sin(time), cos(time), cos(time*1.5));
 //        ofTranslate(-xSize*xstep/2, -ySize*ystep/2);
         glPointSize(4);
         points.draw();

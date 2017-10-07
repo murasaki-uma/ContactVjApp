@@ -45,7 +45,7 @@ public:
     
     void update(float volume)
     {
-        time += 0.01+volume;
+        time += 0.001+volume;
         float scalex = sin(ofGetElapsedTimef()*0.05)*0.03;
         float scaley = cos(ofGetElapsedTimef()*0.05)*0.03;
         for(int i= 0; i < field.getVertices().size(); i++)

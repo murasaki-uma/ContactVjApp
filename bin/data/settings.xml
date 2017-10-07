@@ -2,27 +2,35 @@
 	<fbo_settings>
 		<main>1</main>
 		<alpha>1</alpha>
-		<Y>300</Y>
+		<Y>212.245</Y>
 		<main_Z>0</main_Z>
-		<alpha_Z>0</alpha_Z>
+		<alpha_Z>2.04082</alpha_Z>
 		<clear_alpha>15</clear_alpha>
-		<main_alpha>15</main_alpha>
-		<alpha_alpha>15</alpha_alpha>
+		<main_alpha>3</main_alpha>
+		<alpha_alpha>255</alpha_alpha>
+	<fullscreen>0</fullscreen>
+		<WidthHeihgt>2380.61, 737.018</WidthHeihgt>
+	<X>-223.469</X>
 	</fbo_settings>
 	<main_fbo>
-		<drawLogo>1</drawLogo>
+		<drawLogo>0</drawLogo>
 		<drawAudioLine>0</drawAudioLine>
 		<drawDarkball>0</drawDarkball>
-		<drawField>0</drawField>
+		<drawField>1</drawField>
 	</main_fbo>
 	<alpha_fbo>
 		<drawRipple>0</drawRipple>
-		<drawLineParticle>1</drawLineParticle>
-		<drawWaveLine>0</drawWaveLine>
+		<drawLineParticle>0</drawLineParticle>
+		<drawWaveLine>1</drawWaveLine>
 		<drawNoiseWalker>0</drawNoiseWalker>
+	<drawLineParticle02>0</drawLineParticle02>
 	</alpha_fbo>
 	<animation>
 		<logo_rotate>0</logo_rotate>
 		<logo_start>0</logo_start>
+	<noreact_line>0</noreact_line>
+	<vol_field>0.5</vol_field>
+		<vol_line>10</vol_line>
 	</animation>
+<settings/>
 </settings>

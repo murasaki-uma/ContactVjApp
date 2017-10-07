@@ -15,6 +15,7 @@ class AudioReactiveLine{
 public:
     
     vector<ofVboMesh> lines;
+	vector<ofVboMesh> noreactLines;
     float width = 1920;
     float height = 1080;
     float xSize =200;
@@ -39,16 +40,13 @@ public:
             {
                 ofVec3f p =ofVec3f(x*xstep-xSize*xstep/2,0,0);
                 l.addVertex(p);
-//                points_orgin.addVertex(p);
                 l.addColor(ofFloatColor(1.0));
-//                points_orgin.addColor(ofFloatColor(1.0));
-//                dists.push_back(0.0);
-                
             }
             
             l.setMode(OF_PRIMITIVE_LINE_STRIP);
             
             lines.push_back(l);
+			noreactLines.push_back(l);
         }
     }
     
@@ -58,11 +56,13 @@ public:
         
         for(int i = 0; i < lines.size(); i++)
         {
-            
-            for(int k = 0; k <= lines[i].getVertices().size(); k++)
+			
+            for(int k = 0; k < lines[i].getVertices().size(); k++)
             {
+				
                 ofVec3f p = lines[i].getVertices()[k];
-                float dist = ofMap( ofDist(p.x,p.y,p.z,0,0,0),0,100,10,0);
+                
+				float dist = ofMap( ofDist(p.x,p.y,p.z,0,0,0),0,100,5,0);
                 float scale = 0.01;
                 ofVec3f n = ofVec3f(
                                     ofNoise((p.x)*scale)-0.5,
@@ -71,25 +71,30 @@ public:
                                     );
                 
                 lines[i].setVertex(k,ofVec3f(p.x,n.y*dist*volume,n.z*dist));
-
-                
+   
             }
-        }
+       
+		}
         
     }
     
-    void draw()
+    void draw(bool noreactlines)
     {
+        ofPushStyle();
+        ofSetLineWidth(3);
         
         for(int i = 0; i < lines.size(); i++)
         {
             ofPushMatrix();
             cout << i*10-25 << endl;
             ofTranslate(0,i*10-20);
+			if (noreactlines) {
+				noreactLines[i].draw();
+			}
             lines[i].draw();
             ofPopMatrix();
         }
-        
+        ofPopStyle();
     }
 };
 

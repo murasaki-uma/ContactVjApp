@@ -96,7 +96,7 @@ public:
     {
         ofSetLineWidth(4);
         ofPushMatrix();
-        ofRotate(sin(time*0.1)*180.0, sin(time), cos(time), cos(time*1.5));
+        ofRotate(sin(time*0.002)*80.0, sin(time), cos(time), cos(time*0.5));
         
             for(int i = 0; i < waves.size(); i++)
             {
