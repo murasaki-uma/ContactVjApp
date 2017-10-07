@@ -69,18 +69,39 @@ class ofApp : public ofBaseApp{
     
     ofxOscParameterSync sync;
     ofParameter<float> fboYposition;
+    ofParameter<float> fboMainZposition;
+    ofParameter<float> fboAlphaZposition;
     ofParameter<bool> fboMain;
     ofParameter<bool> fboAlpha;
     ofParameter<bool> drawLogo;
     ofParameter<bool> drawRipple;
     ofParameter<bool> drawLineParticle;
     ofParameter<bool> drawAudioLine;
+    ofParameter<bool> drawDarkball;
+    ofParameter<bool> drawField;
+    ofParameter<bool> drawWaveLine;
+    ofParameter<bool> drawNoiseWalker;
     ofParameter<int> clearAlpha;
     ofParameter<int> mainAlpha;
     ofParameter<int> alphaAlpha;
     
+    ofParameter<bool> logoRotate;
+    ofParameter<bool> logoStart;
+    
+    ofVec3f mainFboPos = ofVec3f(0,0,0);
+    ofVec3f alphaFboPos = ofVec3f(0,0,0);
+    
+    
+    
+
+    
+//    ofxOscParameterSync sync;
+    
     
     ofParameterGroup parameters_fbo;
+    ofParameterGroup parameters_main;
+    ofParameterGroup parameters_alpha;
+    ofParameterGroup animationSettings;
     ofParameterGroup parameters;
     ofxPanel gui;
     

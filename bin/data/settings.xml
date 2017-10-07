@@ -1,0 +1,28 @@
+<settings>
+	<fbo_settings>
+		<main>1</main>
+		<alpha>1</alpha>
+		<Y>300</Y>
+		<main_Z>0</main_Z>
+		<alpha_Z>0</alpha_Z>
+		<clear_alpha>15</clear_alpha>
+		<main_alpha>15</main_alpha>
+		<alpha_alpha>15</alpha_alpha>
+	</fbo_settings>
+	<main_fbo>
+		<drawLogo>1</drawLogo>
+		<drawAudioLine>0</drawAudioLine>
+		<drawDarkball>0</drawDarkball>
+		<drawField>0</drawField>
+	</main_fbo>
+	<alpha_fbo>
+		<drawRipple>0</drawRipple>
+		<drawLineParticle>1</drawLineParticle>
+		<drawWaveLine>0</drawWaveLine>
+		<drawNoiseWalker>0</drawNoiseWalker>
+	</alpha_fbo>
+	<animation>
+		<logo_rotate>0</logo_rotate>
+		<logo_start>0</logo_start>
+	</animation>
+</settings>

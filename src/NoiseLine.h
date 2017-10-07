@@ -16,7 +16,7 @@ class NoiseLine
 public:
     ofVboMesh points;
     ofVboMesh points_orgin;
-    float width = 1920;
+    float width = 1920*2;
     float height = 1080;
     float xSize =20;
     float xstep = 10;

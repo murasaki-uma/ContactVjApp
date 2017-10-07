@@ -198,6 +198,13 @@ public:
     
     void click()
     {
+        float maxRadius = 30;
+        float radius = 0;
+        float radius02 = 0;
+        float radius03 = 0;
+        float linePi = -PI/2;
+        tween_rotate = 0.0;
+        time = 0;
         isAnimationStart = !isAnimationStart;
     }
     
